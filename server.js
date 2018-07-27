@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const passport = require('passport');
 const users = require('./routes/api/users');
+const books = require('./routes/api/books');
 
 const app = express();
 
@@ -31,7 +32,8 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.use('/api/users', users);
-// app.use('/api/list', shoppingList);
+app.use('/api/books', books);
+
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => console.log(`server run on port ${port}`));
