@@ -43,6 +43,23 @@ router.post(
 	}
 );
 
+//@route GET /api/books/:id
+//@desc Get book by id
+//@access private
+router.get(
+	'/:id',
+	passport.authenticate('jwt', { session: false }),
+	(req, res) => {
+		Book.findById(req.params.id).then(book => {
+			if (!book) {
+				res.status(404).json({ error: 'No book with this id' });
+			} else {
+				res.json(book);
+			}
+		});
+	}
+);
+
 //@route PUT /api/books/:id
 //@desc Update book
 //@access private
